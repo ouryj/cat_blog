@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<div class="ui main text container segment">
+    <%cats.forEach(function(cat){ %>
+        <p class="ui text"><%=cat.name%></p>
+        <img class="ui image" src="<%=cat.image %>" alt="">
+        <div class="field">
+
+        <a href="/cats/<%=cat._id%>" class="ui blue button " >more info</a>
+    </div>
+
+
+   <% }) %>
+</div>
+
+<% include ../partials/footer %>
+

@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+
+<div class="ui text main container segment">
+    <h1><%=cat.name%></h1>
+    <div class="ui segement">
+        <img class="ui fluid image" src="<%=cat.image%>">
+    </div>
+    <p class="text"><%=cat.habbit%></p>
+    <p>by-<strong><%=cat.author.username%></strong></p>
+    <p class="ui extra small text"><%=cat.created.toDateString()%></p>
+    <div class="ui segment">
+        <a href="/cats/<%=cat._id%>/edit" class="ui yellow button">edit</a>
+        <form action="/cats/<%=cat._id%>?_method=delete" method="post">
+            <button class="ui red button">delete</button>
+        </form>
+    </div>
+    <div class="ui segement">
+        <a href="/cats/<%=cat._id%>/comments/new" class="ui green button">leave a comment</a>
+        <% cat.comments.forEach(function(comment){ %>
+            <div class="ui comments">
+                <h3 class="ui dividing header">Comments</h3>
+                <div class="comment">
+                  <a class="avatar">
+                    <img src="/images/avatar/small/matt.jpg">
+                  </a>
+                  <div class="content">
+                    <a class="author"><%=comment.author.username%></a>
+                    <div class="metadata">
+                      <span class="date"><%=comment.created.toDateString()%></span>
+                    </div>
+                    <div class="text">
+                      <%=comment.text%>
+                    </div>
+                    <div class="actions">
+                      <a class="reply">Reply</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <a href="/cats/<%=cat._id%>/comments/<%=comment._id%>/edit" class="ui small yellow button">edit comment</a>
+            <form action="/cats/<%=cat._id%>/comments/<%=comment._id%>?_method=delete" method="post">
+                <button class="ui red small button">delete comment</button>
+            </form>
+
+       <% }) %>
+    </div>
+
+</div>
+
+<% include ../partials/footer %>
